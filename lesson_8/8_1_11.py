@@ -4,8 +4,10 @@ class Hero:
         self.name = name
         self.motto = motto
 
-    def say(name, motto):
-        print(self.name, "говорит:", self.motto)
+    def say(self):
+        print(f'{self.name} говорит: {self.motto}')
+
+
 # Не удаляйте код ниже, это проверка (иначе мы укусим вас за бочок)
 
 pythomir = Hero("Питомир", "Кусь за Русь!")
