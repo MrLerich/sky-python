@@ -6,12 +6,11 @@ class Box:
 
 
     def observe(self):
-        print(f'Это похоже на ящик размером {self.size} и весом {self.weight}кг')
-
+        return f'Это похоже на ящик размером {self.size} и весом {self.weight}кг'
 
 class Container(Box):
     def open(self):
-        print(f'В ящике размером {self.size} и весом {self.weight}кг оказалось {self.contains}')
+        return f'В ящике размером {self.size} и весом {self.weight}кг оказалось {self.contains}'
 
 
 box_1 = Box("30x30", "1", "15 золотых монет")
