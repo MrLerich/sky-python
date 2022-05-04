@@ -1,5 +1,4 @@
 import requests
-import json
 import random
 from classes.basic_word import BasicWord
 

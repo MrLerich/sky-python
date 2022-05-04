@@ -13,9 +13,6 @@ class BasicWord:
     def get_word(self):
         """Возвращает первоначальное слово для игры"""
         return self.word
-    def get_subwords(self):
-        """Возвращает все возможные подслова для игры"""
-        return self.subwords
 
     def get_number_of_subwords(self):
         """Возвращает количество возможных вложенных слов"""

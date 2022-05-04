@@ -1,8 +1,5 @@
 import utils
-from utils import load_random_word
 from classes.player import Player
-from classes.basic_word import BasicWord
-
 
 def main():
 
@@ -15,10 +12,9 @@ def main():
     word = utils.load_random_word()
     # слово, из которого придумываем слова
     base_word = word.get_word().upper()
-    # print(base_word)
     # количество всех возможных придуманных слов из выбранного
     quntity_subwords = word.get_number_of_subwords()
-    # print(quntity_subwords)
+
 
     print(f"Составьте {quntity_subwords} слов из слова {base_word}\n"
           "Слова должны быть не короче 3 букв\n"
@@ -30,27 +26,24 @@ def main():
 
         invented_word = input().strip().lower()
 
+        if player.is_word_in_invented(invented_word):
+            print(f"Такое слово уже было.")
+            continue
+
         if invented_word == "стоп" or invented_word == "stop":
             print(f"Игра завершена!\nВы угадали {player.get_quntity_users_words} слов")
+            quit()
 
-        if word.is_in_subwords(invented_word): # хорошее - есть в subwords
-            player.add_correct_words(invented_word)     #добавляю в список пльзовательских хороших слов
-            step_game = quntity_subwords - player.get_quntity_users_words() # вычисляю осталось ходов
-            print(f"Верно\nОсталось угадать {step_game} слов")
-            continue
-        # elif player.is_word_in_invented(invented_word): #ХОЧУ ЗАПИСАТЬ ЕСЛИ ПРИДУМАННОЕ СЛОВО УЖЕ БЫЛО В УГАДАННЫХ,ТО ИДТИ ДАЛЬШЕ УГАДЫВАТЬ НЕ ИЗМЕНЯЯ СЧЕТЧИКИ
-        #     step_game = quntity_subwords - player.get_quntity_users_words()  # вычисляю осталось ходов
-        #     print(f"Верно, но вы уже отгадали это слово\nОсталось угадать {step_game} слов")
+        if word.is_in_subwords(invented_word):          # хорошее - есть в subwords
+            player.add_correct_words(invented_word)     #добавляю в список пользовательских хороших слов
+            step_game += 1                              # добавляем тк был удачный ход(отгадано слово)
+            print(f"Верно\nОсталось угадать {quntity_subwords - player.get_quntity_users_words()} слов")
 
-        # if invented_word НЕТ В SUBWORDS:
-        #     print(f"Неверно\nОсталось угадать {step_game} слов")
-        #
-
-
+        else:
+            print(f"Неверно\nОсталось угадать {quntity_subwords - player.get_quntity_users_words()} слов")
 
     print("Cлова закончились, игра завершена!\n"
-          f"Вы угадали {len(player.get_quntity_users_words())} слов")
-
+          f"Вы угадали {player.get_quntity_users_words()} слов")
 
 if __name__ == "__main__":
     main()
