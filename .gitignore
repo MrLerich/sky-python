@@ -1,2 +1,6 @@
 /venv/
 /test/
+.idea/
+*.log
+**/logs
+logs/**

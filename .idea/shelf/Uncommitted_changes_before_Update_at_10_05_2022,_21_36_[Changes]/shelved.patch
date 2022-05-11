@@ -1,0 +1,138 @@
+Index: lesson_9/9_1_5_Color_Image.py
+===================================================================
+diff --git a/lesson_9/9_1_5_Color_Image.py b/lesson_9/9_1_5_Color_Image.py
+deleted file mode 100644
+--- a/lesson_9/9_1_5_Color_Image.py	(revision a5debccc92dcb5985591f3668c26f3783780f0aa)
++++ /dev/null	(revision a5debccc92dcb5985591f3668c26f3783780f0aa)
+@@ -1,22 +0,0 @@
+-from pil import Image, ImageDraw
+-
+-img = Image.new ('RGB', (780, 340), 'white') # новое изображение в переменной img ("палитра",(размеры), "чем заполнить")
+-draw = ImageDraw(img) #объект = поле для рисования
+-
+-data = '1101110001101011000111111' #информация о том что мы должны нарисовать
+-for x in range(5):                                                         #по 5 пикселей из data
+-    for y in range(5):
+-        if data[x + y * 5] == '1':
+-            draw.rectangle((x*10, y*10, x*10 + 9, y*10 + 9), fill='black') # рисуем включенные черным
+-
+-for i in range(255): # шкала серого
+-    draw.rectangle((i*3, 60, i*3+2, 70), fill=(i, i, i)) #red = green = blue = grey
+-
+-for x in range(255): # цветные кубики
+-    for y in range(255):
+-        draw.points((x, y + 80), fill=(x, 0, y))
+-        draw.points((x + 260, y + 80), fill=(y, x, y))
+-        draw.points((x + 520, y + 80), fill=(y, y, x))
+-
+-img
+-
+Index: lesson_8/8_1_11.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Hero:\n\n    def __init__(self, name, motto):\n        self.name = name\n        self.motto = motto\n\n    def say(name, motto):\n        print(self.name, \"говорит:\", self.motto)\n# Не удаляйте код ниже, это проверка (иначе мы укусим вас за бочок)\n\npythomir = Hero(\"Питомир\", \"Кусь за Русь!\")\npythomir.say()\ndjangomir = Hero(\"Джангомир\", \"Работает - и ладно!\")\ndjangomir.say()\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lesson_8/8_1_11.py b/lesson_8/8_1_11.py
+--- a/lesson_8/8_1_11.py	(revision a5debccc92dcb5985591f3668c26f3783780f0aa)
++++ b/lesson_8/8_1_11.py	(date 1651679407000)
+@@ -4,8 +4,10 @@
+         self.name = name
+         self.motto = motto
+ 
+-    def say(name, motto):
+-        print(self.name, "говорит:", self.motto)
++    def say(self):
++        print(f'{self.name} говорит: {self.motto}')
++
++
+ # Не удаляйте код ниже, это проверка (иначе мы укусим вас за бочок)
+ 
+ pythomir = Hero("Питомир", "Кусь за Русь!")
+Index: lesson_8/8_1_12.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Hero:\n\n  def __init__(self, name, things=[]):\n    self.name = name\n    self.things = things\n\n  def collect(self, things):\n    self.things.append(things)\n\n# Не удаляйте код ниже, это проверка (иначе мы укусим вас за бочок)\n\npythomir = Hero(\"Питомир\")\npythomir.collect(\"Усы хитрости\")\npythomir.collect(\"Рукавички пряморукости\")\n\nif len(pythomir.things) == 2:\n  print(\"Проверка пройдена\")\nelse:\n  print(\"Добавление в список things работает некорректно\")
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lesson_8/8_1_12.py b/lesson_8/8_1_12.py
+--- a/lesson_8/8_1_12.py	(revision a5debccc92dcb5985591f3668c26f3783780f0aa)
++++ b/lesson_8/8_1_12.py	(date 1651679407000)
+@@ -1,18 +1,20 @@
+ class Hero:
+ 
+-  def __init__(self, name, things=[]):
++  def __init__(self, name):
+     self.name = name
+-    self.things = things
++    self.things = []
+ 
+   def collect(self, things):
+     self.things.append(things)
+ 
++
+ # Не удаляйте код ниже, это проверка (иначе мы укусим вас за бочок)
+ 
+ pythomir = Hero("Питомир")
+ pythomir.collect("Усы хитрости")
+ pythomir.collect("Рукавички пряморукости")
+ 
++
+ if len(pythomir.things) == 2:
+   print("Проверка пройдена")
+ else:
+Index: lesson_9/larin_cource_2/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import utils\nfrom classes.player import Player\n\ndef main():\n\n    user_name = input(\"Введите имя игрока\\n\").strip()\n\n    player = Player(user_name)\n    print(f\"Привет, {player.get_user_name()}!\")\n\n    # выбранный экземпляр класса\n    word = utils.load_random_word()\n    # слово, из которого придумываем слова\n    base_word = word.get_word().upper()\n    # print(base_word)\n    # количество всех возможных придуманных слов из выбранного\n    quntity_subwords = word.get_number_of_subwords()\n    # print(quntity_subwords)\n\n    print(f\"Составьте {quntity_subwords} слов из слова {base_word}\\n\"\n          \"Слова должны быть не короче 3 букв\\n\"\n          \"Чтобы закончить игру, угадайте все слова или напишите 'стоп'\\n\"\n          \"Поехали, ваше первое слово?\")\n\n    step_game = 0\n    while step_game < quntity_subwords:\n\n        invented_word = input().strip().lower()\n\n        if invented_word == \"стоп\" or invented_word == \"stop\":\n            print(f\"Игра завершена!\\nВы угадали {player.get_quntity_users_words} слов\")\n\n        if word.is_in_subwords(invented_word): # хорошее - есть в subwords\n            player.add_correct_words(invented_word)     #добавляю в список пльзовательских хороших слов\n            step_game = quntity_subwords - player.get_quntity_users_words() # вычисляю осталось ходов\n            print(f\"Верно\\nОсталось угадать {step_game} слов\")\n            continue\n        # if player.is_word_in_invented(invented_word): #ХОЧУ ЗАПИСАТЬ ЕСЛИ ПРИДУМАННОЕ СЛОВО УЖЕ БЫЛО В УГАДАННЫХ,ТО ИДТИ ДАЛЬШЕ УГАДЫВАТЬ НЕ ИЗМЕНЯЯ СЧЕТЧИКИ\n        #     print(f\"Верно, но вы уже придумали это слово\\nОсталось угадать {step_game} слов\")\n        #     continue\n        else:\n            print(f\"Неверно\\nОсталось угадать {step_game} слов\")\n\n    print(\"Cлова закончились, игра завершена!\\n\"\n          f\"Вы угадали {player.get_quntity_users_words()} слов\")\n\nif __name__ == \"__main__\":\n    main()\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lesson_9/larin_cource_2/main.py b/lesson_9/larin_cource_2/main.py
+--- a/lesson_9/larin_cource_2/main.py	(revision a5debccc92dcb5985591f3668c26f3783780f0aa)
++++ b/lesson_9/larin_cource_2/main.py	(date 1651679407000)
+@@ -12,10 +12,9 @@
+     word = utils.load_random_word()
+     # слово, из которого придумываем слова
+     base_word = word.get_word().upper()
+-    # print(base_word)
+     # количество всех возможных придуманных слов из выбранного
+     quntity_subwords = word.get_number_of_subwords()
+-    # print(quntity_subwords)
++
+ 
+     print(f"Составьте {quntity_subwords} слов из слова {base_word}\n"
+           "Слова должны быть не короче 3 букв\n"
+@@ -27,19 +26,21 @@
+ 
+         invented_word = input().strip().lower()
+ 
++        if player.is_word_in_invented(invented_word):
++            print(f"Такое слово уже было.")
++            continue
++
+         if invented_word == "стоп" or invented_word == "stop":
+             print(f"Игра завершена!\nВы угадали {player.get_quntity_users_words} слов")
++            quit()
+ 
+-        if word.is_in_subwords(invented_word): # хорошее - есть в subwords
+-            player.add_correct_words(invented_word)     #добавляю в список пльзовательских хороших слов
+-            step_game = quntity_subwords - player.get_quntity_users_words() # вычисляю осталось ходов
+-            print(f"Верно\nОсталось угадать {step_game} слов")
+-            continue
+-        # if player.is_word_in_invented(invented_word): #ХОЧУ ЗАПИСАТЬ ЕСЛИ ПРИДУМАННОЕ СЛОВО УЖЕ БЫЛО В УГАДАННЫХ,ТО ИДТИ ДАЛЬШЕ УГАДЫВАТЬ НЕ ИЗМЕНЯЯ СЧЕТЧИКИ
+-        #     print(f"Верно, но вы уже придумали это слово\nОсталось угадать {step_game} слов")
+-        #     continue
++        if word.is_in_subwords(invented_word):          # хорошее - есть в subwords
++            player.add_correct_words(invented_word)     #добавляю в список пользовательских хороших слов
++            step_game += 1                              # добавляем тк был удачный ход(отгадано слово)
++            print(f"Верно\nОсталось угадать {quntity_subwords - player.get_quntity_users_words()} слов")
++
+         else:
+-            print(f"Неверно\nОсталось угадать {step_game} слов")
++            print(f"Неверно\nОсталось угадать {quntity_subwords - player.get_quntity_users_words()} слов")
+ 
+     print("Cлова закончились, игра завершена!\n"
+           f"Вы угадали {player.get_quntity_users_words()} слов")
